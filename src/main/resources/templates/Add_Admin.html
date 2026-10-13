@@ -3,33 +3,52 @@
 
 <head>
 	<meta charset="UTF-8" />
-	<title>Admin : Add</title>
-	<link rel="stylesheet" href="" th:href="@{/css/Add_Admin.css}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Add Admin | Food Fiesta</title>
+	<link rel="stylesheet" th:href="@{/css/main.css}" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
-	<a th:href="@{/admin/services}">Back to Services</a>
-	<div class="addAdmin">
-		<h3 style="color: red;">ADD NEW ADMIN/PARTNER</h3>
-		<form action="" th:action="@{/addingAdmin}" method="post">
-			Admin_Name :
-			<input type="text" name="adminName" placeholder="Enter name..." class="adminName" minlength="2" required>
-			<br />
+	<div class="auth-wrapper">
+		<div style="width: 100%; max-width: 460px;">
+			<a th:href="@{/admin/services}" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
 
-			Admin_Email :
-			<input type="email" name="adminEmail" placeholder="Enter email..." class="adminEmail" required><br />
+			<div class="auth-card animate-up">
+				<div style="margin-bottom: 32px; text-align: center;">
+					<div style="width: 48px; height: 48px; background: var(--primary-container); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+						<i class="fa-solid fa-user-shield" style="color: var(--primary);"></i>
+					</div>
+					<h2 style="font-size: 1.5rem; margin-bottom: 8px;">Add New Admin</h2>
+					<p style="font-size: 0.875rem; color: var(--on-surface-variant);">Create an admin or partner account</p>
+				</div>
 
-			Admin_Number :
-			<input type="tel" name="adminNumber" placeholder="Enter 10 digit mobile number..." class="adminNumber"
-				pattern="[0-9]{10}" required /><br />
+				<form th:action="@{/addingAdmin}" method="post">
+					<div class="form-group">
+						<label class="form-label">Full Name</label>
+						<input type="text" name="adminName" placeholder="Enter name" class="input-field" minlength="2" required>
+					</div>
+					<div class="form-group">
+						<label class="form-label">Email Address</label>
+						<input type="email" name="adminEmail" placeholder="admin@foodfiesta.com" class="input-field" required>
+					</div>
+					<div class="form-group">
+						<label class="form-label">Mobile Number</label>
+						<input type="tel" name="adminNumber" placeholder="10 digit mobile number" class="input-field" pattern="[0-9]{10}" required>
+					</div>
+					<div class="form-group">
+						<label class="form-label">Initial Password</label>
+						<input type="password" name="adminPassword" placeholder="Set an initial password" class="input-field" minlength="4" required>
+					</div>
 
-			Admin_Password :
-			<input type="password" name="adminPassword" placeholder="Set an initial password" minlength="4"
-				required /><br />
+					<p th:if="${error}" th:text="${error}" class="alert-error"></p>
 
-			<p th:if="${error}" th:text="${error}" style="color: red;"></p>
-			<button type="submit">Add_Admin</button>
-		</form>
+					<button type="submit" class="btn btn-primary" style="width: 100%;">
+						<i class="fa-solid fa-plus"></i> Add Admin
+					</button>
+				</form>
+			</div>
+		</div>
 	</div>
 </body>
 

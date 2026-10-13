@@ -3,137 +3,181 @@
 
 <head>
 	<meta charset="UTF-8" />
-	<title>ADMIN PAGE :</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Admin Dashboard | Food Fiesta</title>
+	<link rel="stylesheet" th:href="@{/css/main.css}" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-	<link rel="stylesheet" href="" th:href="@{/css/Admin_page.css}" />
-
 </head>
 
-<body>
-	<div style="padding: 12px 20px; display: flex; gap: 12px; align-items: center;">
-		<a class="back" th:href="@{/home}">Home</a>
-		<form th:action="@{/logout}" method="post" style="display:inline;">
-			<button type="submit" class="back" style="cursor:pointer;">Sign out</button>
-		</form>
-	</div>
-	<center>
-		<section class="tables">
-			<div class="admins">
-				<h2>Admins :</h2>
-				<table>
-					<tr>
-						<th>Admin_Id</th>
-						<th>Admin_Name</th>
-						<th>Admin_Email</th>
-						<th>Admin_Number</th>
-						<th>Actions</th>
-					</tr>
-					<tr th:each="admin :${admins}">
-						<td th:text="${admin.adminId}"></td>
-						<td th:text="${admin.adminName}"></td>
-						<td th:text="${admin.adminEmail}"></td>
-						<td th:text="${admin.adminNumber}"></td>
-						<td><a style="color: blue;" href="" th:href="@{'/updateAdmin/'+${admin.adminId}}"><i
-									class="fa-solid fa-pen"></i></a><span>&nbsp;</span>
-							<form th:action="@{'/deleteAdmin/'+${admin.adminId}'}" method="post" style="display:inline;"
-									  onsubmit="return confirm('Delete this admin?');">
-									<button type="submit" class="icon-btn delete"
-											style="background:none;border:none;color:red;cursor:pointer;padding:0;">
-										<i class="fa-solid fa-trash"></i>
-									</button>
-								</form>
-						</td>
-					</tr>
-				</table>
-				<a href="" class="btns" th:href="@{/addAdmin}">Add_Admin</a>
-			</div>
-
-			<div class="users" th:object="${userObject}">
-				<h2>Users :</h2>
-				<table>
-					<tr>
-						<th>User_Id</th>
-						<th>User_Name</th>
-						<th>User_Email</th>
-						<th>User_Number</th>
-						<th>Actions</th>
-					</tr>
-					<tr th:each="user :${users}">
-						<td th:text="${user.u_id}"></td>
-						<td th:text="${user.uname}"></td>
-						<td th:text="${user.uemail}"></td>
-						<td th:text="${user.unumber}"></td>
-						<td><a style="color: blue;" href="" th:href="@{'/updateUser/'+${user.u_id}}"><i
-									class="fa-solid fa-pen"></i></a><span>&nbsp;</span>
-							<form th:action="@{'/deleteUser/'+${user.u_id}'}" method="post" style="display:inline;"
-									  onsubmit="return confirm('Delete this user? Their orders will be removed too.');">
-									<button type="submit" class="icon-btn delete"
-											style="background:none;border:none;color:red;cursor:pointer;padding:0;">
-										<i class="fa-solid fa-trash"></i>
-									</button>
-								</form>
-						</td>
-					</tr>
-				</table>
-				<a href="" class="btns" th:href="@{'/addUser'}">Add_User</a>
-			</div>
-
-
-			<div class="products">
-				<h2>Products :</h2>
-				<table>
-					<tr>
-						<th>Product_Id</th>
-						<th>Product_Name</th>
-						<th>Product_Price</th>
-						<th>Actions</th>
-					</tr>
-					<tr th:each="product :${products}">
-						<td th:text="${product.pid}"></td>
-						<td th:text="${product.pname}"></td>
-						<td th:text="${product.pprice}"></td>
-						<td><a style="color: blue;" href="" th:href="@{'/updateProduct/'+${product.pid}}"><i
-									class="fa-solid fa-pen"></i></a><span>&nbsp;</span>
-							<form th:action="@{'/deleteProduct/'+${product.pid}'}" method="post" style="display:inline;"
-									  onsubmit="return confirm('Delete this product?');">
-									<button type="submit" class="icon-btn delete"
-											style="background:none;border:none;color:red;cursor:pointer;padding:0;">
-										<i class="fa-solid fa-trash"></i>
-									</button>
-								</form>
-						</td>
-					</tr>
-				</table>
-				<a href="" class="btns" th:href="@{'/addProduct'}">Add_Product</a>
-			</div>
-			
-			<div class="details">
-				<h2>Orders :</h2>
-			<table >
-				<tr>
-					<th>User_Name</th>
-					<th>User_Email</th>
-					<th>Product_Name</th>
-					<th>Product_Price</th>
-					<th>Product_Quantity</th>
-					<th>Total_Ammount</th>
-					<th>Date</th>
-				</tr>
-				<tr th:each="order :${orders}">
-					<td th:text="${order.user.uname}"></td>
-					<td th:text="${order.user.uemail}"></td>
-					<td th:text="${order.oName}"></td>
-					<td th:text="${order.oPrice}"></td>
-					<td th:text="${order.oQuantity}"></td>
-					<td th:text="${order.totalAmmout}"></td>
-					<td th:text="${order.orderDate}"></td>
-
-				</tr>
-			</table>
+<body style="background: var(--surface-variant);">
+	<nav class="navbar">
+		<a th:href="@{/home}" class="nav-logo">
+			<i class="fa-solid fa-fire-burner"></i> Food Fiesta
+		</a>
+		<div class="nav-links" style="align-items: center;">
+			<a th:href="@{/home}">Home</a>
+			<form th:action="@{/logout}" method="post" style="display:inline;">
+				<button type="submit" class="btn btn-primary" style="padding: 10px 24px;">Sign Out</button>
+			</form>
 		</div>
-		</section>
-	</center>
-	
+	</nav>
+
+	<main class="section-padding">
+		<div class="container animate-up">
+			<div style="margin-bottom: 48px;">
+				<span style="letter-spacing: 0.2em; font-weight: 800; color: var(--primary); font-size: 0.75rem; text-transform: uppercase;">Management Center</span>
+				<h1 style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 8px;">Admin Dashboard</h1>
+				<p style="color: var(--on-surface-variant); margin-top: 8px;">Manage admins, customers, products and keep an eye on every order.</p>
+			</div>
+
+			<section class="panel">
+				<div class="panel-head">
+					<h2 class="panel-title"><i class="fa-solid fa-user-shield"></i> Admins</h2>
+					<a th:href="@{/addAdmin}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Admin</a>
+				</div>
+				<div class="table-wrap">
+					<table class="data-table">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Phone</th>
+								<th style="text-align: right;">Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="admin :${admins}">
+								<td th:text="${admin.adminId}"></td>
+								<td style="font-weight: 600;" th:text="${admin.adminName}"></td>
+								<td th:text="${admin.adminEmail}"></td>
+								<td th:text="${admin.adminNumber}"></td>
+								<td style="text-align: right; white-space: nowrap;">
+									<a class="icon-btn" th:href="@{'/updateAdmin/'+${admin.adminId}}" title="Edit">
+										<i class="fa-solid fa-pen"></i>
+									</a>
+									<form th:action="@{'/deleteAdmin/'+${admin.adminId}}" method="post" style="display:inline;"
+										  onsubmit="return confirm('Delete this admin?');">
+										<button type="submit" class="icon-btn danger" title="Delete">
+											<i class="fa-solid fa-trash"></i>
+										</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+			<section class="panel" th:object="${userObject}">
+				<div class="panel-head">
+					<h2 class="panel-title"><i class="fa-solid fa-users"></i> Customers</h2>
+					<a th:href="@{/addUser}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add User</a>
+				</div>
+				<div class="table-wrap">
+					<table class="data-table">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Phone</th>
+								<th style="text-align: right;">Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="user :${users}">
+								<td th:text="${user.u_id}"></td>
+								<td style="font-weight: 600;" th:text="${user.uname}"></td>
+								<td th:text="${user.uemail}"></td>
+								<td th:text="${user.unumber}"></td>
+								<td style="text-align: right; white-space: nowrap;">
+									<a class="icon-btn" th:href="@{'/updateUser/'+${user.u_id}}" title="Edit">
+										<i class="fa-solid fa-pen"></i>
+									</a>
+									<form th:action="@{'/deleteUser/'+${user.u_id}}" method="post" style="display:inline;"
+										  onsubmit="return confirm('Delete this user? Their orders will be removed too.');">
+										<button type="submit" class="icon-btn danger" title="Delete">
+											<i class="fa-solid fa-trash"></i>
+										</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+			<section class="panel">
+				<div class="panel-head">
+					<h2 class="panel-title"><i class="fa-solid fa-utensils"></i> Products</h2>
+					<a th:href="@{/addProduct}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Product</a>
+				</div>
+				<div class="table-wrap">
+					<table class="data-table">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Price</th>
+								<th style="text-align: right;">Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="product :${products}">
+								<td th:text="${product.pid}"></td>
+								<td style="font-weight: 600;" th:text="${product.pname}"></td>
+								<td th:text="'₹ '+${product.pprice}"></td>
+								<td style="text-align: right; white-space: nowrap;">
+									<a class="icon-btn" th:href="@{'/updateProduct/'+${product.pid}}" title="Edit">
+										<i class="fa-solid fa-pen"></i>
+									</a>
+									<form th:action="@{'/deleteProduct/'+${product.pid}}" method="post" style="display:inline;"
+										  onsubmit="return confirm('Delete this product?');">
+										<button type="submit" class="icon-btn danger" title="Delete">
+											<i class="fa-solid fa-trash"></i>
+										</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+			<section class="panel">
+				<div class="panel-head">
+					<h2 class="panel-title"><i class="fa-solid fa-receipt"></i> Orders</h2>
+				</div>
+				<div class="table-wrap">
+					<table class="data-table">
+						<thead>
+							<tr>
+								<th>Customer</th>
+								<th>Email</th>
+								<th>Product</th>
+								<th>Price</th>
+								<th>Qty</th>
+								<th>Total</th>
+								<th>Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="order :${orders}">
+								<td style="font-weight: 600;" th:text="${order.user.uname}"></td>
+								<td th:text="${order.user.uemail}"></td>
+								<td th:text="${order.oName}"></td>
+								<td th:text="'₹ '+${order.oPrice}"></td>
+								<td th:text="${order.oQuantity}"></td>
+								<td style="font-weight: 700; color: var(--primary);" th:text="'₹ '+${order.totalAmmout}"></td>
+								<td th:text="${order.orderDate}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</section>
+		</div>
+	</main>
 </body>
 
 </html>

@@ -3,26 +3,47 @@
 
 <head>
 	<meta charset="UTF-8" />
-	<title>Document</title>
-	<link rel="stylesheet" href="" th:href="@{/css/Update_Product.css}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Update Product | Food Fiesta</title>
+	<link rel="stylesheet" th:href="@{/css/main.css}" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
-		<a th:href="@{/admin/services}">Back_To_Services</a>
-	<div class="updateProduct">
-		<h3 style="font-weight: bolder;color: seagreen;">UPDATE EXISTING PRODUCT :</h3>
-		<form action="" th:action="@{'/updatingProduct/'+${product.pid}}" th:object="${product}" method="post">
-			Product_Id:
-			<input type="hidden" th:text="${product.pid}" th:value="${product.pid}" /><br />
-			Product_Name :
-			<input type="text" name="pname" th:value="${product.pname}" /> <br />
-			Product_Price :
-			<input type="text" name="pprice" th:value="${product.pprice}" /><br />
-			Product_Desc : <br />
-			<textarea name="pdescription" id="" cols="10" rows="1" th:text="${product.pdescription}"></textarea><br />
-			<button type="submit">Update_Product</button>
+	<div class="auth-wrapper">
+		<div style="width: 100%; max-width: 460px;">
+			<a th:href="@{/admin/services}" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
 
-		</form>
+			<div class="auth-card animate-up">
+				<div style="margin-bottom: 32px; text-align: center;">
+					<div style="width: 48px; height: 48px; background: var(--primary-container); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+						<i class="fa-solid fa-pen-to-square" style="color: var(--primary);"></i>
+					</div>
+					<h2 style="font-size: 1.5rem; margin-bottom: 8px;">Update Product</h2>
+					<p style="font-size: 0.875rem; color: var(--on-surface-variant);" th:text="'Editing product #'+${product.pid}"></p>
+				</div>
+
+				<form th:action="@{'/updatingProduct/'+${product.pid}}" th:object="${product}" method="post">
+					<input type="hidden" name="pid" th:value="${product.pid}" />
+					<div class="form-group">
+						<label class="form-label">Product Name</label>
+						<input type="text" name="pname" th:value="${product.pname}" class="input-field" required>
+					</div>
+					<div class="form-group">
+						<label class="form-label">Price (₹)</label>
+						<input type="text" name="pprice" th:value="${product.pprice}" class="input-field" required>
+					</div>
+					<div class="form-group">
+						<label class="form-label">Description</label>
+						<textarea name="pdescription" class="input-field" th:text="${product.pdescription}"></textarea>
+					</div>
+
+					<button type="submit" class="btn btn-primary" style="width: 100%;">
+						<i class="fa-solid fa-check"></i> Save Changes
+					</button>
+				</form>
+			</div>
+		</div>
 	</div>
 </body>
 

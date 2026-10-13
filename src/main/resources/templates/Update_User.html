@@ -1,26 +1,50 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<meta charset="UTF-8" />
-	<title>Admin : Update</title>
-		<link rel="stylesheet" href="" th:href="@{/css/Update_User.css}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Update User | Food Fiesta</title>
+	<link rel="stylesheet" th:href="@{/css/main.css}" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
+
 <body>
-	<a th:href="@{/admin/services}"> Back to Services</a>
-	<div class="updateUser">
-		<h3 style="color: red;"> UPDATE EXISTING USER/CUSTOMER </h3>
-		<form action="" th:action="@{'/updatingUser/'+${user.u_id}}" th:object="${user}" method="post">
-			User_Id :
-			<input  type="hidden" name="uid" th:value="${user.u_id}" th:text="${user.u_id}"/><br />
-			User_Name :
-			<input type="text" name="uname" th:value="${user.uname}"/>
-			User_Emai :
-			<input type="email" name="uemail" th:value="${user.uemail}"  />
-			User_Number :
-			<input type="tel" name="unumber" th:value="${user.unumber}" pattern="[0-9]{10}"/>
-			
-		<button type="submit">Update_User</button>
-		</form>
+	<div class="auth-wrapper">
+		<div style="width: 100%; max-width: 460px;">
+			<a th:href="@{/admin/services}" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
+
+			<div class="auth-card animate-up">
+				<div style="margin-bottom: 32px; text-align: center;">
+					<div style="width: 48px; height: 48px; background: var(--primary-container); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+						<i class="fa-solid fa-user-pen" style="color: var(--primary);"></i>
+					</div>
+					<h2 style="font-size: 1.5rem; margin-bottom: 8px;">Update Customer</h2>
+					<p style="font-size: 0.875rem; color: var(--on-surface-variant);" th:text="'Editing customer #'+${user.u_id}"></p>
+				</div>
+
+				<form th:action="@{'/updatingUser/'+${user.u_id}}" th:object="${user}" method="post">
+					<input type="hidden" name="uid" th:value="${user.u_id}" />
+					<div class="form-group">
+						<label class="form-label">Full Name</label>
+						<input type="text" name="uname" th:value="${user.uname}" class="input-field" minlength="2" required>
+					</div>
+					<div class="form-group">
+						<label class="form-label">Email Address</label>
+						<input type="email" name="uemail" th:value="${user.uemail}" class="input-field" required>
+					</div>
+					<div class="form-group">
+						<label class="form-label">Mobile Number</label>
+						<input type="tel" name="unumber" th:value="${user.unumber}" class="input-field" pattern="[0-9]{10}" required>
+					</div>
+
+					<button type="submit" class="btn btn-primary" style="width: 100%;">
+						<i class="fa-solid fa-check"></i> Save Changes
+					</button>
+				</form>
+			</div>
+		</div>
 	</div>
 </body>
+
 </html>

@@ -3,31 +3,52 @@
 
 <head>
 	<meta charset="UTF-8" />
-	<title>User : Add</title>
-	<link rel="stylesheet" href="" th:href="@{/css/Add_User.css}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Add User | Food Fiesta</title>
+	<link rel="stylesheet" th:href="@{/css/main.css}" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
-	<a th:href="@{/admin/services}">Back to Services</a>
-	<div class="addUser">
-		<h3 style="color: red;">ADD NEW USER/CUSTOMER</h3>
-		<form action="" th:action="@{/addingUser}" method="post">
-			<label for="uname">User_Name :</label>
-			<input type="text" id="uname" name="uname" minlength="2" required />
+	<div class="auth-wrapper">
+		<div style="width: 100%; max-width: 460px;">
+			<a th:href="@{/admin/services}" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
 
-			<label for="uemail">User_Email :</label>
-			<input type="email" id="uemail" name="uemail" required />
+			<div class="auth-card animate-up">
+				<div style="margin-bottom: 32px; text-align: center;">
+					<div style="width: 48px; height: 48px; background: var(--primary-container); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+						<i class="fa-solid fa-user-plus" style="color: var(--primary);"></i>
+					</div>
+					<h2 style="font-size: 1.5rem; margin-bottom: 8px;">Add New Customer</h2>
+					<p style="font-size: 0.875rem; color: var(--on-surface-variant);">Create a customer account on their behalf</p>
+				</div>
 
-			<label for="unumber">User_Number :</label>
-			<input type="tel" id="unumber" name="unumber" pattern="[0-9]{10}" required />
+				<form th:action="@{/addingUser}" method="post">
+					<div class="form-group">
+						<label class="form-label" for="uname">Full Name</label>
+						<input type="text" id="uname" name="uname" placeholder="Enter name" class="input-field" minlength="2" required>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="uemail">Email Address</label>
+						<input type="email" id="uemail" name="uemail" placeholder="customer@example.com" class="input-field" required>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="unumber">Mobile Number</label>
+						<input type="tel" id="unumber" name="unumber" placeholder="10 digit mobile number" class="input-field" pattern="[0-9]{10}" required>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="upassword">Temporary Password</label>
+						<input type="password" id="upassword" name="upassword" placeholder="Set an initial password" class="input-field" minlength="4" required>
+					</div>
 
-			<label for="upassword">Temporary_Password :</label>
-			<input type="password" id="upassword" name="upassword" minlength="4" required
-				placeholder="Set an initial password" />
+					<p th:if="${error}" th:text="${error}" class="alert-error"></p>
 
-			<p th:if="${error}" th:text="${error}" style="color: red;"></p>
-			<button type="submit">Add_User</button>
-		</form>
+					<button type="submit" class="btn btn-primary" style="width: 100%;">
+						<i class="fa-solid fa-plus"></i> Add Customer
+					</button>
+				</form>
+			</div>
+		</div>
 	</div>
 </body>
 

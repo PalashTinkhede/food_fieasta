@@ -19,7 +19,7 @@
 - **🥘 Diverse Catalog**: Support for multiple cuisines including Tandoori, Paneer delicacies, and Desserts.
 - **🛒 Order Lifecycle**: Seamless order placement, tracking, and history management.
 - **📄 API Documentation**: Interactive Swagger/OpenAPI documentation for all system endpoints.
-- **🎨 Dynamic UI**: Sleek, responsive interface with image-rich menus.
+- **🎨 Modern UI**: A unified, token-driven design system (`main.css`) with a glassmorphism navbar, card-based layouts, smooth micro-animations, and fully responsive pages — shared across the public site, user ordering flow, and admin dashboard.
 - **📊 Admin Dashboard**: Comprehensive overview of users, products, and total orders.
 
 ---
@@ -31,7 +31,7 @@
 | **Backend** | Java 21, Spring Boot 3.4.2, Spring Security, Hibernate |
 | **Database** | PostgreSQL |
 | **Documentation** | SpringDoc OpenAPI (Swagger) |
-| **Frontend** | Thymeleaf, Vanilla CSS, JS |
+| **Frontend** | Thymeleaf, single design-system stylesheet (`main.css`, CSS custom properties), Font Awesome 6, Plus Jakarta Sans |
 | **Build Tool** | Maven |
 
 ---
@@ -53,6 +53,25 @@ src/main/java/com/example/demo/
 └── 📁 services/           # Business Logic Layer
     └── 📁 impl/           # Service Implementations
 ```
+
+---
+
+## 🎨 UI Design System
+
+Every page in the app — public, user, and admin — is styled by a single stylesheet,
+`src/main/resources/static/css/main.css`, built on CSS custom properties (design tokens):
+
+- **Tokens**: brand orange (`--primary: #c2410c`) with light/container variants, surface and
+  outline colors, shadows, and a shared transition curve — change the look app-wide in one place.
+- **Typography**: [Plus Jakarta Sans](https://fonts.google.com/specimen/Plus+Jakarta+Sans) with
+  tight letter-spacing on headings and fluid `clamp()` sizing for hero text.
+- **Components**: a floating glassmorphism navbar, pill buttons (`.btn-primary` / `.btn-outline`),
+  glass cards (`.card-glass`), dashboard panels (`.panel`), styled data tables (`.data-table`)
+  with hover states and icon action buttons, and auth/form cards (`.auth-card`, `.input-field`).
+- **Feedback**: `.alert-error` / `.alert-success` banners and a slide-up entrance animation
+  (`.animate-up`).
+- **Responsive**: fluid layouts, horizontal-scroll table wrappers, and mobile breakpoints
+  throughout — no page-specific stylesheets remain.
 
 ---
 

@@ -3,26 +3,46 @@
 
 <head>
 	<meta charset="UTF-8" />
-	<title>Document</title>
-	<link rel="stylesheet" href="" th:href="@{/css/Add_Product.css}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Add Product | Food Fiesta</title>
+	<link rel="stylesheet" th:href="@{/css/main.css}" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
-<a th:href="@{/admin/services}">Back to Services</a>
-	<div class="addProducts">
-		<h3 style="font-weight: bolder;color: seagreen;">ADD NEW PRODUCT :</h3>
-		<form action="" th:action="@{/addingProduct}" method="post">
-			Product_Name :
-			<input type="text" name="pname" value="" placeholder="Enter Product Name....." /> <br />
-			Product_Price :
-			<input type="text" name="pprice" placeholder="Enter Product Price...." /><br />
-			Product_Desc : <br />
-			<textarea name="pdescription" id="" cols="15" rows="1"
-				placeholder="Enter Product Description.."></textarea><br />
+	<div class="auth-wrapper">
+		<div style="width: 100%; max-width: 460px;">
+			<a th:href="@{/admin/services}" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
 
-			<button type="submit">Add_Product</button>
+			<div class="auth-card animate-up">
+				<div style="margin-bottom: 32px; text-align: center;">
+					<div style="width: 48px; height: 48px; background: var(--primary-container); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+						<i class="fa-solid fa-utensils" style="color: var(--primary);"></i>
+					</div>
+					<h2 style="font-size: 1.5rem; margin-bottom: 8px;">Add New Product</h2>
+					<p style="font-size: 0.875rem; color: var(--on-surface-variant);">Add a new dish to the catalog</p>
+				</div>
 
-		</form>
+				<form th:action="@{/addingProduct}" method="post">
+					<div class="form-group">
+						<label class="form-label">Product Name</label>
+						<input type="text" name="pname" placeholder="Enter product name" class="input-field" required>
+					</div>
+					<div class="form-group">
+						<label class="form-label">Price (₹)</label>
+						<input type="text" name="pprice" placeholder="Enter product price" class="input-field" required>
+					</div>
+					<div class="form-group">
+						<label class="form-label">Description</label>
+						<textarea name="pdescription" placeholder="Describe the dish..." class="input-field"></textarea>
+					</div>
+
+					<button type="submit" class="btn btn-primary" style="width: 100%;">
+						<i class="fa-solid fa-plus"></i> Add Product
+					</button>
+				</form>
+			</div>
+		</div>
 	</div>
 </body>
 
