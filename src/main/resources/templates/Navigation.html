@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <nav th:fragment="navbar()" class="navbar">
+        <a th:href="@{/home}" class="nav-logo">
+            <i class="fa-solid fa-fire-burner"></i> Food Fiesta
+        </a>
+        <div class="nav-links">
+            <a th:href="@{/home}">Home</a>
+            <a th:href="@{/products}">Menu</a>
+            <a th:href="@{/location}">Location</a>
+            <a th:href="@{/about}">Story</a>
+
+            <!-- Signed out -->
+            <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="btn btn-primary"
+               style="padding: 10px 24px; color: white;">Sign In</a>
+
+            <!-- Signed in: role decides the destination -->
+            <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin/services}">Dashboard</a>
+            <a sec:authorize="hasRole('USER')" th:href="@{/product/back}">My Orders</a>
+            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post"
+                  style="display:inline;">
+                <button type="submit" class="btn btn-primary"
+                        style="padding: 10px 24px; color: white; border: none; cursor: pointer;">
+                    Sign Out
+                </button>
+            </form>
+        </div>
+    </nav>
+</body>
+</html>
